@@ -4,7 +4,7 @@ import Title from './components/Title';
 import PokemonButton from './components/PokemonButton';
 import DrugButton from './components/DrugButton';
 import StartButton from './components/StartButton';
-import RandomWord from './components/RandomWork';
+import RandomWord from './components/RandomWord';
 import Scores from './components/Scores';
 import axios from 'axios';
 
@@ -42,22 +42,16 @@ function App() {
 
     })
   }
-// choose drug or pokemon
-  function chooseRandom () {
-    const random = drugAndPokemon[Math.floor(Math.random() * drugAndPokemon.length)];
-    setRandomWord(random)
-  }
 
+// choose random word
   useEffect(() => {    
-
     setTimeout(() =>{
-      chooseRandom ()
+      const random = drugAndPokemon[Math.floor(Math.random() * drugAndPokemon.length)];
+        setRandomWord(random)
       setWrongAnswerDrugButton(null)
       setWrongAnswerPokemonButton(null)
     }, 400
     )
-
-
   }, [drugAndPokemon])
   
 
@@ -87,7 +81,7 @@ function App() {
       }
   }
 
-// handle durg button
+// handle drug button
   const handleDrugButton  =  (e) =>{
     e.preventDefault()
     if ((drugAndPokemon[1]) ===  randomWord){
@@ -113,7 +107,7 @@ function App() {
       <Title/> 
 
 
-      {displayStart == true ? 
+      {displayStart === true ? 
         <StartButton handleButton = {handleButton}/>:
 
         <div>
