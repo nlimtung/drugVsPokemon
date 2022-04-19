@@ -8,9 +8,12 @@ function App() {
   // state
   const [drugAndPokemon, setDrugAndPokemon] = useState([])
   const [randomWord, setRandomWord] = useState("")
+  const [round, setRound] = useState(0)
+  const [displayStart, setDisplayStart] = useState(true)
+  const [score, setScore] = useState(0)
 
   // get random drug
-  const drugList =["Zovirax", "Fosamax", "Rasilez", "Xanax", "Moduret", "Pentasa", "Cordarone", "Caduet", "Clavulin", "Lioresal", "Cogentin", "Casodex", "Lumigan", "Dulcolax", "Alphagan", "Suboxone", "Tegretol", "Coreg", "Cefzil", "Alvesco", "Dalacin", "Orbenin", "Serophene", "Canesten", "Neoral", "Pradaxa", "Aerius", "Pristiq", "Tiazac", "Lomotil", "Cardura", "Avodart", "Vasotec", "Eryc", "Plendil", "Lipidil", "Duragesic", "Proscar", "Diflucan", "Prozac", "Reminyl", "Kytril", "Gleevec", "Indocid", "Atrovent", "Accutane", "Nizoral", "Toradol", "Acilac", "Heptovir", "Lamictal", "Femara", "Sinemet", "Zestril", "Carbolith", "Vyvanse", "Provera", "Mobicox", "Flagyl", "Vigamox", "Bactroban", "Nitrostat", "Noroxin", "Olmetec", "Tamiflu", "Ditropan", "Invega", "Elidel", "Mirapex", "Lyrica", "Stemetil", "Prometrium", "Inderal", "Accupril", "Xarelto", "Zoloft", "Januvia", "Sotacor", "Imitrex", "Prograf", "Nolvadex", "Hytrin", "Terazol", "Androderm", "tetracycline", "Innohep", "Detrol", "Topamax", "Zytram", "Depakene", "Levitra", "Champix", "Accolate", "Relenza", "Celebrex", "Remeron", "Keppra", "Cosentyx", "Valtrex", "Creon", "Emflaza"]
+  const drugList =["Zovirax", "Fosamax", "Rasilez", "Xanax", "Moduret", "Pentasa", "Cordarone", "Caduet", "Clavulin", "Lioresal", "Cogentin", "Casodex", "Lumigan", "Dulcolax", "Alphagan", "Suboxone", "Tegretol", "Coreg", "Cefzil", "Alvesco", "Dalacin", "Orbenin", "Serophene", "Canesten", "Neoral", "Pradaxa", "Aerius", "Pristiq", "Tiazac", "Lomotil", "Cardura", "Avodart", "Vasotec", "Eryc", "Plendil", "Lipidil", "Duragesic", "Proscar", "Diflucan", "Prozac", "Reminyl", "Kytril", "Gleevec", "Indocid", "Atrovent", "Accutane", "Nizoral", "Toradol", "Acilac", "Heptovir", "Lamictal", "Femara", "Sinemet", "Zestril", "Carbolith", "Vyvanse", "Provera", "Mobicox", "Flagyl", "Vigamox", "Bactroban", "Nitrostat", "Noroxin", "Olmetec", "Tamiflu", "Ditropan", "Invega", "Elidel", "Mirapex", "Lyrica", "Stemetil", "Prometrium", "Inderal", "Accupril", "Xarelto", "Zoloft", "Januvia", "Sotacor", "Imitrex", "Prograf", "Nolvadex", "Hytrin", "Terazol", "Androderm", "tetracycline", "Innohep", "Detrol", "Topamax", "Zytram", "Depakene", "Levitra", "Champix", "Accolate", "Relenza", "Celebrex", "Remeron", "Keppra", "Cosentyx", "Valtrex", "Creon", "Emflaza", "Zofran", "Activelle", "Alesse", "Skyrizi"]
   const randomDrug = drugList[Math.floor(Math.random() * drugList.length)];
 
   // getting a random pokemon
@@ -37,14 +40,17 @@ function App() {
   }
 
   useEffect(() => {    
+
     chooseRandom ()
-  })
+
+  }, [drugAndPokemon])
   
 
   // handle start
   const handleButton = (e) => {
     e.preventDefault()
-      getRandomPokemonAndDrug()
+    getRandomPokemonAndDrug();
+    setDisplayStart(false)
   }
 
   // handle pokemon button
@@ -52,39 +58,58 @@ function App() {
     e.preventDefault()
       if ((drugAndPokemon[0]) ==  randomWord){
 
-        console.log("hurray")
+        setScore(score + 1)
         getRandomPokemonAndDrug()
+        setRound(round+1)
+
       }
       else {
         console.log("boo")
+        getRandomPokemonAndDrug()
+        setRound(round+1)
+
+
       }
   }
 
 // handle durg button
   const handleDrugButton  =  (e) =>{
     e.preventDefault()
-      if ((drugAndPokemon[1]) ==  randomWord){
+    if ((drugAndPokemon[1]) ==  randomWord){
+      getRandomPokemonAndDrug()
+      setRound(round+1)
+      setScore(score + 1)
 
-        console.log("hurray")
-        getRandomPokemonAndDrug()
-        }
-      else {
-        console.log("boo")
       }
-      }
+    else {
+      console.log("boo")
+
+      getRandomPokemonAndDrug()
+      setRound(round+1)
+
+
+    }
+  }
 
 
   return (
     <div className="App">
+      <img src = {require("./images/pokemontitle.png")}></img>
 
-      {randomWord}
+      <button onClick={handleButton} style = {{display: displayStart == true ? "inline": "none"}}> start</button>
 
-     <button onClick={handleButton}> start</button>
+      {randomWord} <br></br>
+
      <button onClick={handlePokemonButton}>pokemon </button>
-     <button onClick={handleDrugButton}>Drug </button>
+     
 
+     <button onClick={handleDrugButton}>Drug </button><br></br>
+     round: {round} 
+      score: {score}<br></br>
     </div>
   );
+
+
 }
 
 export default App;
