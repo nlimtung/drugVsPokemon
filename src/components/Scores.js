@@ -5,7 +5,7 @@ export default function Scores(props) {
     return(
         <div>
             <h3>round: {props.round}</h3>
-            <h3>Score: {props.score}</h3>
+            <h3>Score: {props.score} / {props.round}</h3>
         </div>
 
     )

@@ -17,9 +17,12 @@ function App() {
   const [round, setRound] = useState(0)
   const [displayStart, setDisplayStart] = useState(true)
   const [score, setScore] = useState(0)
+  const [wrongAnswerPokemonButton, setWrongAnswerPokemonButton] = useState (null)
+  const [wrongAnswerDrugButton, setWrongAnswerDrugButton] = useState (null)
+
 
   // get random drug
-  const drugList =["Zovirax", "Fosamax", "Rasilez", "Xanax", "Moduret", "Pentasa", "Cordarone", "Caduet", "Clavulin", "Lioresal", "Cogentin", "Casodex", "Lumigan", "Dulcolax", "Alphagan", "Suboxone", "Tegretol", "Coreg", "Cefzil", "Alvesco", "Dalacin", "Orbenin", "Serophene", "Canesten", "Neoral", "Pradaxa", "Aerius", "Pristiq", "Tiazac", "Lomotil", "Cardura", "Avodart", "Vasotec", "Eryc", "Plendil", "Lipidil", "Duragesic", "Proscar", "Diflucan", "Prozac", "Reminyl", "Kytril", "Gleevec", "Indocid", "Atrovent", "Accutane", "Nizoral", "Toradol", "Acilac", "Heptovir", "Lamictal", "Femara", "Sinemet", "Zestril", "Carbolith", "Vyvanse", "Provera", "Mobicox", "Flagyl", "Vigamox", "Bactroban", "Nitrostat", "Noroxin", "Olmetec", "Tamiflu", "Ditropan", "Invega", "Elidel", "Mirapex", "Lyrica", "Stemetil", "Prometrium", "Inderal", "Accupril", "Xarelto", "Zoloft", "Januvia", "Sotacor", "Imitrex", "Prograf", "Nolvadex", "Hytrin", "Terazol", "Androderm", "tetracycline", "Innohep", "Detrol", "Topamax", "Zytram", "Depakene", "Levitra", "Champix", "Accolate", "Relenza", "Celebrex", "Remeron", "Keppra", "Cosentyx", "Valtrex", "Creon", "Emflaza", "Zofran", "Activelle", "Alesse", "Skyrizi", "Elavil", "Constella"]
+  const drugList =["Zovirax", "Fosamax", "Rasilez", "Xanax", "Moduret", "Pentasa", "Cordarone", "Caduet", "Clavulin", "Lioresal", "Cogentin", "Casodex", "Lumigan", "Dulcolax", "Alphagan", "Suboxone", "Tegretol", "Coreg", "Cefzil", "Alvesco", "Dalacin", "Orbenin", "Serophene", "Canesten", "Neoral", "Pradaxa", "Aerius", "Pristiq", "Tiazac", "Lomotil", "Cardura", "Avodart", "Vasotec", "Eryc", "Plendil", "Lipidil", "Duragesic", "Proscar", "Diflucan", "Prozac", "Reminyl", "Kytril", "Gleevec", "Indocid", "Atrovent", "Accutane", "Nizoral", "Toradol", "Acilac", "Heptovir", "Lamictal", "Femara", "Sinemet", "Zestril", "Carbolith", "Vyvanse", "Provera", "Mobicox", "Flagyl", "Vigamox", "Bactroban", "Nitrostat", "Noroxin", "Olmetec", "Tamiflu", "Ditropan", "Invega", "Elidel", "Mirapex", "Lyrica", "Stemetil", "Prometrium", "Inderal", "Accupril", "Xarelto", "Zoloft", "Januvia", "Sotacor", "Imitrex", "Prograf", "Nolvadex", "Hytrin", "Terazol", "Androderm", "tetracycline", "Innohep", "Detrol", "Topamax", "Zytram", "Depakene", "Levitra", "Champix", "Accolate", "Relenza", "Celebrex", "Remeron", "Keppra", "Cosentyx", "Valtrex", "Creon", "Emflaza", "Zofran", "Activelle", "Alesse", "Skyrizi", "Elavil", "Constella", "Fuzeon"]
   const randomDrug = drugList[Math.floor(Math.random() * drugList.length)];
 
   // getting a random pokemon
@@ -47,7 +50,13 @@ function App() {
 
   useEffect(() => {    
 
-    chooseRandom ()
+    setTimeout(() =>{
+      chooseRandom ()
+      setWrongAnswerDrugButton(null)
+      setWrongAnswerPokemonButton(null)
+    }, 400
+    )
+
 
   }, [drugAndPokemon])
   
@@ -62,31 +71,39 @@ function App() {
   // handle pokemon button
   const handlePokemonButton  =  (e) =>{
     e.preventDefault()
-      if ((drugAndPokemon[0]) ==  randomWord){
+      if ((drugAndPokemon[0]) ===  randomWord){
         setScore(score + 1)
         getRandomPokemonAndDrug()
         setRound(round+1)
+        setWrongAnswerPokemonButton(false)
+
       }
       else {
         console.log("boo")
         getRandomPokemonAndDrug()
         setRound(round+1)
+        setWrongAnswerPokemonButton(true)
+
       }
   }
 
 // handle durg button
   const handleDrugButton  =  (e) =>{
     e.preventDefault()
-    if ((drugAndPokemon[1]) ==  randomWord){
+    if ((drugAndPokemon[1]) ===  randomWord){
       getRandomPokemonAndDrug()
       setRound(round+1)
       setScore(score + 1)
+      setWrongAnswerDrugButton(false)
+
 
       }
     else {
       console.log("boo")
       getRandomPokemonAndDrug()
       setRound(round+1)
+      setWrongAnswerDrugButton(true)
+
     }
   }
 
@@ -102,8 +119,8 @@ function App() {
         <div>
           <RandomWord randomWord = {randomWord}/>
           <div className='choice-buttons'>
-            <PokemonButton handlePokemonButton = {handlePokemonButton}/>
-            <DrugButton handleDrugButton = {handleDrugButton}/>
+            <PokemonButton handlePokemonButton = {handlePokemonButton} wrongAnswerPokemonButton = {wrongAnswerPokemonButton}/>
+            <DrugButton handleDrugButton = {handleDrugButton}wrongAnswerDrugButton = {wrongAnswerDrugButton}/>
           </div>
         </div>
       }
