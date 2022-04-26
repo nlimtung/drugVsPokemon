@@ -15,6 +15,14 @@ button {
     opacity: 0.7;
     cursor:pointer
   }
+.start-button img {
+  width:auto;
+  height: auto
+}
+ .start-button   {
+  background-color: white;
+  border: none;
+}
 
  button img {
    width: 200px;
