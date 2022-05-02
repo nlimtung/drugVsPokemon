@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/drugVsPokemon/static/css/main.5d1e1002.css",
-    "main.js": "/drugVsPokemon/static/js/main.86548df9.js",
+    "main.js": "/drugVsPokemon/static/js/main.9c3dbe51.js",
     "static/js/787.ab378faf.chunk.js": "/drugVsPokemon/static/js/787.ab378faf.chunk.js",
     "static/media/pokemontitle.png": "/drugVsPokemon/static/media/pokemontitle.65a39638ca8323108434.png",
     "static/media/pill.png": "/drugVsPokemon/static/media/pill.e53789daaeef36c1f6a2.png",
@@ -9,11 +9,11 @@
     "static/media/start.png": "/drugVsPokemon/static/media/start.43521609ab00dbd7eb59.png",
     "index.html": "/drugVsPokemon/index.html",
     "main.5d1e1002.css.map": "/drugVsPokemon/static/css/main.5d1e1002.css.map",
-    "main.86548df9.js.map": "/drugVsPokemon/static/js/main.86548df9.js.map",
+    "main.9c3dbe51.js.map": "/drugVsPokemon/static/js/main.9c3dbe51.js.map",
     "787.ab378faf.chunk.js.map": "/drugVsPokemon/static/js/787.ab378faf.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.5d1e1002.css",
-    "static/js/main.86548df9.js"
+    "static/js/main.9c3dbe51.js"
   ]
 }
